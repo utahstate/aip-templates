@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "DECLARE\r\n    LV_DATE   DATE := SYSDATE;\r\n    LV_USER   VARCHAR2 (60) := USER;\r\n    LV_PIDM   NUMBER (10) := NULL;\r\nBEGIN\r\n    BEGIN\r\n        SELECT SPRIDEN_PIDM\r\n          INTO LV_PIDM\r\n          FROM SPRIDEN\r\n         WHERE SPRIDEN_ID = LV_USER AND SPRIDEN_CHANGE_IND IS NULL;\r\n    EXCEPTION\r\n        WHEN NO_DATA_FOUND\r\n        THEN\r\n            LV_PIDM := NULL;\r\n        WHEN TOO_MANY_ROWS\r\n        THEN\r\n            LV_PIDM := NULL;\r\n    END;\r\n\r\n    UPDATE BANINST1.ZSRLOCA\r\n       SET ZSRLOCA_ANUM = LV_USER,\r\n           ZSRLOCA_CREATED_BY = :CREATED_BY,\r\n           ZSRLOCA_CREATED_DATE = :CREATED_DATE,\r\n           ZSRLOCA_TERM_CODE = :TERM_CODE,\r\n           ZSRLOCA_UPDATED_BY = LV_USER,\r\n           ZSRLOCA_UPDATED_DATE = LV_DATE,\r\n           ZSRLOCA_ZIP = :ZIP_CODE\r\n     WHERE ZSRLOCA_SURROGATE_ID = :id;\r\nEND;",
+   "codeDelete": "BEGIN\r\n   DELETE FROM BANINST1.ZSRLOCA\r\n         WHERE ZSRLOCA_SURROGATE_ID = :id;\r\nEND;",
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "  SELECT ZSRLOCA_ANUM                                      ANUM,\r\n         SPRIDEN_LAST_NAME || ', ' || SPRIDEN_FIRST_NAME   STUDENT_NAME,\r\n         ZSRLOCA_CREATED_BY                                CREATED_BY,\r\n         ZSRLOCA_CREATED_DATE                              CREATED_DATE,\r\n         ZSRLOCA_TERM_CODE                                 TERM_CODE,\r\n         ZSRLOCA_UPDATED_BY                                UPDATED_BY,\r\n         ZSRLOCA_UPDATED_DATE                              UPDATED_DATE,\r\n         ZSRLOCA_ZIP                                       ZIP_CODE,\r\n         ZSRLOCZ_CITY                                      CITY,\r\n         ZSRLOCZ_COUNTY                                    COUNTY,\r\n         ZSRLOCZ_CAMPUS                                    CAMPUS,\r\n         ZSRLOCA_SURROGATE_ID                              \"id\"\r\n    FROM BANINST1.ZSRLOCA\r\n         LEFT JOIN BANINST1.ZSRLOCZ ON ZSRLOCA_ZIP = ZSRLOCZ_ZIP\r\n         JOIN SPRIDEN\r\n           ON SPRIDEN_ID = ZSRLOCA_ANUM AND SPRIDEN_CHANGE_IND IS NULL\r\n   WHERE SPRIDEN_ID = USER\r\nORDER BY ZSRLOCA_TERM_CODE DESC\r\n   FETCH FIRST 1 ROW ONLY",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPStuStudentLocationTestJohn",
+   "codePost": "DECLARE\r\n  LV_DATE   DATE := SYSDATE;\r\n  LV_USER   VARCHAR2 (60) := USER;\r\nBEGIN\r\n\r\n  INSERT INTO BANINST1.ZSRLOCA (ZSRLOCA_ANUM,\r\n                                ZSRLOCA_CREATED_BY,\r\n                                ZSRLOCA_CREATED_DATE,\r\n                                ZSRLOCA_TERM_CODE,\r\n                                ZSRLOCA_UPDATED_BY,\r\n                                ZSRLOCA_UPDATED_DATE,\r\n                                ZSRLOCA_ZIP)\r\n       VALUES (LV_USER,\r\n               LV_USER,\r\n               LV_DATE,\r\n               :TERM_CODE,\r\n               LV_USER,\r\n               LV_DATE,\r\n               :ZIP_CODE);\r\nEND;",
+   "developerSecurity": []
+}
