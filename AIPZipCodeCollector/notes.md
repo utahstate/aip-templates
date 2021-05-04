@@ -24,11 +24,11 @@ View Zip Codes:
 
 ### TODO:
 
-[ ] Fix names of components/virtual domains
-[ ] Remove unused query from virtual domain
-[ ] Use CSS for page builder instead of inlined/js
-[ ] Use page builder import/export for organizing this archive
-[ ] Move zip code save method to the AIP save event instead of on the save button onclick (may not work, angular js events bindings might cause issues)
-[ ] get rid of timeout for radio to checkbox js if possible
-[ ] Hide elements that change and then display them only once they are ready so they don't flash on the screen in the wrong state
-[ ] Consolodate scripts so there is less setup required and less complexity in dealing with load states of all of the various components individually.
+- [ ] Fix names of components/virtual domains
+- [ ] Remove unused query from virtual domain
+- [ ] Use CSS for page builder instead of inlined/js
+- [ ] Use page builder import/export for organizing this archive
+- [ ] Move zip code save method to the AIP save event instead of on the save button onclick (may not work, angular js events bindings might cause issues)
+- [ ] get rid of timeout for radio to checkbox js if possible
+- [ ] Hide elements that change and then display them only once they are ready so they don't flash on the screen in the wrong state
+- [ ] Consolodate scripts so there is less setup required and less complexity in dealing with load states of all of the various components individually.
