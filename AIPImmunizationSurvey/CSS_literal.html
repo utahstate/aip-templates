@@ -1,0 +1,44 @@
+<style>
+/*
+  could also so an @import, but it is probably easier to deploy to just have it in here
+
+  ** the @import method requires stylesheet to be added in through CSS Manager **
+  ** URL would look something like this **
+  @import url('/BannerExtensibility/cssRender?name=aip.ImmunizationSurvey');
+  */
+
+
+/*
+    Make sure all rules are prefixed in a way that it doesn't bleed into other action
+    items as the css will be rendered on page with other items!
+*/
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] .check-list {
+    margin-bottom: 1em;
+}
+
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] .check-list .pb-radiolabel {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 8px;
+    margin-bottom: 1em;
+    line-height: 1.4;
+}
+
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] .check-list .pb-radiolabel > span {
+    flex: 1;
+}
+
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] label.preformatted {
+    font-weight: normal;
+}
+
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] textarea.comment-box {
+    width: 100%;
+    max-width: 600px;
+    height: 12em;
+}
+
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] button.primary[disabled] {
+    background-color: #ddd !important;
+}
+</style>
