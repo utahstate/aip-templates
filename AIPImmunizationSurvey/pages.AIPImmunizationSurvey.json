@@ -123,6 +123,7 @@
         {
           "valueStyle": "form-control comment-box",
           "readonly": false,
+          "documentation": "",
           "name": "ImmunizationComment",
           "style": "form-group",
           "model": "comment",
@@ -131,8 +132,7 @@
           "type": "textArea",
           "parameters": {},
           "validation": {},
-          "required": false,
-          "documentation": ""
+          "required": false
         }
       ],
       "nextButtonLabel": "Next",
@@ -142,24 +142,6 @@
     },
     {
       "components": [
-        {
-          "allowDelete": false,
-          "components": [],
-          "allowNew": false,
-          "pageSize": 5,
-          "saveDataLabel": "hide this save",
-          "loadInitially": true,
-          "type": "detail",
-          "newRecordLabel": "hide this add",
-          "deleteRecordLabel": "hide this delete",
-          "refreshDataLabel": "hide this refresh",
-          "name": "ImmunizationRecordDetail",
-          "allowModify": false,
-          "onLoad": "var contextSelector = '[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"]';\nvar context = $(contextSelector);\n\nwindow.__context = context;\nwindow.__ImmunizationRecord = $ImmunizationRecord;\n\n$hasImmunizationRecord = false;\n\nwindow.doUpdateImmunzationSurvey = (event) => {\n  var selectedRadio = $('.check-list input[type=\"radio\"]:checked', context);\n  var commentBox = $('textarea', context);\n\n  var data = {\n    immunization_comment: commentBox.val(),\n    imst_code: selectedRadio.val(),\n  };\n  var queryParams = null;\n  console.log(data)\n\n  $ImmunizationRecord.post(\n    data,\n    queryParams,\n    function () {\n      alert(\"Immunization Survey submitted successfully.\", {\n        type: \"success\",\n        flash: true,\n      });\n    },\n    function (response) {\nconsole.log(arguments, data, selectedRadio, commentBox)\n      alert(response.data.errors.errorMessage, {\n        type: \"error\",\n        flash: true,\n      });\n    }\n  );\n};\n\n$(\"#pbid-ActionItemContentDetail-save-button\", context).attr(\n  \"onclick\",\n  \"return doUpdateImmunzationSurvey(event);\"\n);\n\n$('.check-list', context).on(\n  \"change\",\n  'input[type=\"radio\"]',\n  function (event) {\n      var isChecked = $(\".check-list input[type='radio']:checked\", context).length === 1;\n\n      if(isChecked) {\n        if(!$hasImmunizationRecord) {\n            params.isResponseModified = true;\n        }\n        $(\"#pbid-ActionItemContentDetail-save-button\", context).removeAttr(\n          \"disabled\"\n        );\n      } else {\n        params.isResponseModified = false;\n        $(\"#pbid-ActionItemContentDetail-save-button\", context).attr(\"disabled\", \"disabled\");\n      }\n  }\n);\nsetTimeout( () => {\n    //$ActionItemStatusAgree.load();\n    if($ActionItemContentDetail && $ActionItemContentDetail.STATUS_COUNT > 0) {\n        $hasImmunizationRecord = true;\n    }\n},\n300);",
-          "model": "ImmunizationRecord",
-          "allowReload": false,
-          "parameters": {}
-        },
         {
           "allowDelete": false,
           "components": [
@@ -185,7 +167,7 @@
           "newRecordLabel": "",
           "name": "ActionItemContentDetail",
           "allowModify": true,
-          "onLoad": "",
+          "onLoad": "(function($) {\n  $(function() {\n    var contextSelector = '[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"]';\n    var context = $(contextSelector);\n\n    var doUpdateImmunzationSurvey = function(event) {\n      var selectedRadio = $('.check-list input[type=\"radio\"]:checked', context);\n      var commentBox = $('textarea', context);\n\n      var data = {\n        immunization_comment: commentBox.val(),\n        imst_code: selectedRadio.val(),\n        immu_code: 'COVID-19',\n      };\n      var queryParams = null;\n\n      $ImmunizationRecord.post(\n        data,\n        queryParams,\n        function () {\n          alert(\"Immunization Survey submitted successfully.\", {\n            type: \"success\",\n            flash: true,\n          });\n        },\n        function (response) {\n          alert(response.data.errors.errorMessage, {\n            type: \"error\",\n            flash: true,\n          });\n        }\n      );\n    };\n\n    $(\"#pbid-ActionItemContentDetail-save-button\", context).on(\n      \"click\",\n      doUpdateImmunzationSurvey,\n    );\n\n    $('body').on(\n      \"change\",\n      `${contextSelector} .check-list input[type=\"radio\"]`,\n      function (event) {\n          var isChecked = $(\".check-list input[type='radio']:checked\", context).length === 1;\n\n          if(isChecked) {\n            params.isResponseModified = true;\n            $(\"#pbid-ActionItemContentDetail-save-button\", context).removeAttr(\n              \"disabled\"\n            );\n          } else {\n            params.isResponseModified = false;\n            $(\"#pbid-ActionItemContentDetail-save-button\", context).attr(\"disabled\", \"disabled\");\n          }\n      }\n    );\n  });\n})(jQuery);",
           "model": "ActionItemContent",
           "allowReload": false,
           "parameters": {
