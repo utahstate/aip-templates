@@ -1,27 +1,23 @@
 var contextSelector = '[ng-controller^="CustomPageController_AIPImmunizationSurvey"]';
 var context = $(contextSelector);
-window.context = context;
+
+window.__context = context;
+window.__ImmunizationRecord = $ImmunizationRecord;
 
 $hasImmunizationRecord = false;
 
-window.doUpdateImmunzationSurvey = function (event) {
+window.doUpdateImmunzationSurvey = (event) => {
   var selectedRadio = $('.check-list input[type="radio"]:checked', context);
   var commentBox = $('textarea', context);
 
   var data = {
     immunization_comment: commentBox.val(),
-    immu_code: selectedRadio.val(),
+    imst_code: selectedRadio.val(),
   };
   var queryParams = null;
   console.log(data)
 
-  var method = $ImmunizationRecord.$post;
-
-  if($hasImmunizationRecord) {
-      method = $ImmunizationRecord.$put;
-  }
-
-  method(
+  $ImmunizationRecord.post(
     data,
     queryParams,
     function () {
@@ -30,7 +26,7 @@ window.doUpdateImmunzationSurvey = function (event) {
         flash: true,
       });
     },
-    function () {
+    function (response) {
 console.log(arguments, data, selectedRadio, commentBox)
       alert(response.data.errors.errorMessage, {
         type: "error",
@@ -64,9 +60,8 @@ $('.check-list', context).on(
       }
   }
 );
-
 setTimeout( () => {
-    $ActionItemStatusAgree.$load();
+    //$ActionItemStatusAgree.load();
     if($ActionItemContentDetail && $ActionItemContentDetail.STATUS_COUNT > 0) {
         $hasImmunizationRecord = true;
     }

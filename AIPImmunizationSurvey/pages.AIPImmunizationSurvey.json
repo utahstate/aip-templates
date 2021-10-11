@@ -1,210 +1,212 @@
 {
-    "components": [
-          {
-                "resource": "virtualDomains.ActionItemContent",
-                "name": "ActionItemContent",
-                "type": "resource",
-                "staticData": []
-          },
-          {
-                "resource": "virtualDomains.ActionItemStatus",
-                "name": "ActionItemStatus",
-                "type": "resource",
-                "staticData": []
-          },
-          {
-                "resource": "virtualDomains.ActionItemReviewStatus",
-                "name": "ActionItemReviewStatus",
-                "type": "resource",
-                "staticData": []
-          },
-          {
-                "readonly": false,
-                "name": "popAID",
-                "onLoad": "if ( typeof(window.params.actionItemId) != 'undefined') {\n    var aid = window.params.actionItemId;\n} else {\n   //temporary - for testing only.\n   window.params.actionItemId = 6;\n}\nsetTimeout( function(){ \n    $ActionItemId.$load();\n}, \n500);",
-                "model": "ActionItemContent",
-                "style": "hidden",
-                "loadInitially": true,
-                "type": "text",
-                "parameters": {},
-                "required": false,
-                "validation": {}
-          },
-          {
-                "readonly": false,
-                "name": "ReviewStatus",
-                "model": "ActionItemReviewStatus",
-                "style": "hidden",
-                "loadInitially": true,
-                "type": "text",
-                "parameters": {
-                      "actionitemid": "$$params.actionItemId"
-                },
-                "value": "gcraact_rvst_code",
-                "required": false,
-                "validation": {}
-          },
-          {
-                "readonly": false,
-                "name": "ActionItemId",
-                "onLoad": "$ActionItemContentDetail.$load();",
-                "model": "ActionItemContent",
-                "style": "hidden",
-                "loadInitially": false,
-                "type": "text",
-                "parameters": {
-                      "actionItemId": "$$params.actionItemId",
-                      "pageid": "$$params.id"
-                },
-                "value": "ACTION_ITEM_ID",
-                "required": false,
-                "validation": {}
-          },
-          {
-                "resource": "virtualDomains.AIPImmunizationRecord",
-                "name": "ImmunizationRecord",
-                "type": "resource",
-                "staticData": []
-          },
-          {
-                "name": "ImmunizationStatusStatic",
-                "type": "resource",
-                "staticData": [
-                      {
-                            "statusDesc": "I am fully vaccinated, but have not yet uploaded proof of vaccination in Aggie Health. [A person is fully vaccinated two weeks after they received their final dose of a required and/or accepted vaccine (two doses for Pfizer or Moderna, one for Johnson & Johnson).",
-                            "statusCode": "VC"
-                      },
-                      {
-                            "statusDesc": "I am not fully vaccinated, but I plan to be and will upload my proof of vaccination before Spring Semester starts on Monday, January 10,2022. I understand that a university official will follow up with me regarding my vaccination status.  **Information for vaccination clinics can be found here: <a href=\"https://vaccine.usu.edu\">vaccine.usu.edu</a>.",
-                            "statusCode": "PL"
-                      },
-                      {
-                            "statusDesc": "During Spring Semester 2022, I will be attending courses fully online and reside outside the state of Utah.",
-                            "statusCode": "NA"
-                      },
-                      {
-                            "statusDesc": "I am not fully vaccinated. I am claiming an exemption from USU's vaccination requirement based on a <strong>medical reason</strong> provided under Utah Law.",
-                            "statusCode": "XM"
-                      },
-                      {
-                            "statusDesc": "I am not fully vaccinated. I am claiming an exemption from USU's vaccination requirement based on a <strong>religious belief</strong> provided under Utah Law.",
-                            "statusCode": "XR"
-                      },
-                      {
-                            "statusDesc": "I am not fully vaccinated. I am claiming an exemption from USU's vaccination requirement based on a <strong>personal belief</strong> provided under Utah Law.",
-                            "statusCode": "XP"
-                      }
-                ]
-          },
-          {
-                "resource": "virtualDomains.AIPImmunizationStatus",
-                "name": "ImmunizationStatus",
-                "type": "resource",
-                "staticData": []
-          },
-          {
-                "components": [
-                      {
-                            "documentation": "",
-                            "loadInitially": true,
-                            "label": "Immunization Status",
-                            "type": "radio",
-                            "required": false,
-                            "sourceParameters": {},
-                            "name": "ImmunizationSelection",
-                            "labelStyle": "preformatted",
-                            "sourceModel": "ImmunizationStatus",
-                            "model": "imst_code",
-                            "style": "check-list",
-                            "labelKey": "none}}<span ng-bind-html=\"item.imst_long_desc\"></span>{{item.none",
-                            "valueKey": "imst_code",
-                            "value": ""
-                      },
-                      {
-                            "valueStyle": "form-control comment-box",
-                            "readonly": false,
-                            "name": "ImmunizationComment",
-                            "style": "form-group",
-                            "model": "comment",
-                            "loadInitially": true,
-                            "label": "Additional Comments",
-                            "type": "textArea",
-                            "parameters": {},
-                            "validation": {},
-                            "required": false
-                      }
-                ],
-                "nextButtonLabel": "Next",
-                "name": "ImmunizationSurveryForm",
-                "showInitially": true,
-                "type": "form"
-          },
-          {
-                "components": [
-                      {
-                            "allowDelete": false,
-                            "components": [
-                                  {
-                                        "asHtml": true,
-                                        "name": "ActionItemContentDisplay",
-                                        "onLoad": "/*$(\"#pbid-ActionItemContentDetail-save-button\").removeClass('btn-sm').addClass('btn-primary').addClass('btn-md');*/\n\n$ActionItemStatusAgree.$load();",
-                                        "model": "ACTION_ITEM_CONTENT",
-                                        "loadInitially": true,
-                                        "type": "display",
-                                        "value": ""
-                                  },
-                                  {
-                                        "loadInitially": false,
-                                        "type": "radio",
-                                        "required": false,
-                                        "sourceParameters": {
-                                              "actionitemid": "$$params.actionItemId"
-                                        },
-                                        "name": "ActionItemStatusAgree",
-                                        "onLoad": "",
-                                        "model": "STATUS_RULE_ID",
-                                        "sourceModel": "ActionItemStatus",
-                                        "style": "",
-                                        "labelKey": "STATUS_RULE_LABEL_TEXT",
-                                        "valueKey": "STATUS_RULE_ID",
-                                        "onUpdate": "params.isResponseModified = true;",
-                                        "value": ""
-                                  }
-                            ],
-                            "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}\n$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop('disabled', false);\nwindow.params.isResponseLocked = false;",
-                            "onSave": "",
-                            "allowNew": false,
-                            "documentation": "Displays data from virtual domain ActionItemContent",
-                            "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\nwindow.params.saved=true;\n$ActionItemContentDetail.$load();",
-                            "pageSize": 1,
-                            "label": "",
-                            "loadInitially": false,
-                            "type": "detail",
-                            "newRecordLabel": "",
-                            "name": "ActionItemContentDetail",
-                            "allowModify": true,
-                            "onLoad": "var contextSelector = '[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"]';\nvar context = $(contextSelector);\nwindow.context = context;\n\n$hasImmunizationRecord = false;\n\nwindow.doUpdateImmunzationSurvey = function (event) {\n  var selectedRadio = $('.check-list input[type=\"radio\"]:checked', context);\n  var commentBox = $('textarea', context);\n\n  var data = {\n    immunization_comment: commentBox.val(),\n    immu_code: selectedRadio.val(),\n  };\n  var queryParams = null;\n  console.log(data)\n\n  var method = $ImmunizationRecord.$post;\n\n  if($hasImmunizationRecord) {\n      method = $ImmunizationRecord.$put;\n  }\n\n  method(\n    data,\n    queryParams,\n    function () {\n      alert(\"Immunization Survey submitted successfully.\", {\n        type: \"success\",\n        flash: true,\n      });\n    },\n    function () {\nconsole.log(arguments, data, selectedRadio, commentBox)\n      alert(response.data.errors.errorMessage, {\n        type: \"error\",\n        flash: true,\n      });\n    }\n  );\n};\n\n$(\"#pbid-ActionItemContentDetail-save-button\", context).attr(\n  \"onclick\",\n  \"return doUpdateImmunzationSurvey(event);\"\n);\n\n$('.check-list', context).on(\n  \"change\",\n  'input[type=\"radio\"]',\n  function (event) {\n      var isChecked = $(\".check-list input[type='radio']:checked\", context).length === 1;\n\n      if(isChecked) {\n        if(!$hasImmunizationRecord) {\n            params.isResponseModified = true;\n        }\n        $(\"#pbid-ActionItemContentDetail-save-button\", context).removeAttr(\n          \"disabled\"\n        );\n      } else {\n        params.isResponseModified = false;\n        $(\"#pbid-ActionItemContentDetail-save-button\", context).attr(\"disabled\", \"disabled\");\n      }\n  }\n);\n\nsetTimeout( function(){ \n    $ActionItemStatusAgree.$load();\n    if($ActionItemContentDetail && $ActionItemContentDetail.STATUS_COUNT > 0) {\n        $hasImmunizationRecord = true;\n    }\n}, \n300);",
-                            "model": "ActionItemContent",
-                            "allowReload": false,
-                            "parameters": {
-                                  "actionitemid": "$$params.actionItemId",
-                                  "pageid": "$$params.id"
-                            }
-                      }
-                ],
-                "name": "PolicyBlock",
-                "showInitially": true,
-                "label": "",
-                "type": "block"
-          },
-          {
-                "name": "CSS",
-                "type": "literal",
-                "value": "<style>\n/*\n  @import url('/BannerExtensibility/cssRender?name=aip.ImmunizationSurvey');\n*/\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] .check-list {\n    margin-bottom: 1em;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] .check-list .pb-radiolabel {\n    display: flex;\n    justify-content: space-between;\n    column-gap: 8px;\n    margin-bottom: 1em;\n    line-height: 1.4;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] .check-list .pb-radiolabel > span {\n    flex: 1;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] label.preformatted {\n    font-weight: normal;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] textarea.comment-box {\n    width: 100%;\n    max-width: 600px;\n    height: 12em;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] button.primary[disabled] {\n    background-color: #ddd !important;\n}\n</style>"
+  "components": [
+    {
+      "resource": "virtualDomains.ActionItemContent",
+      "name": "ActionItemContent",
+      "type": "resource",
+      "staticData": []
+    },
+    {
+      "resource": "virtualDomains.ActionItemStatus",
+      "name": "ActionItemStatus",
+      "type": "resource",
+      "staticData": []
+    },
+    {
+      "resource": "virtualDomains.ActionItemReviewStatus",
+      "name": "ActionItemReviewStatus",
+      "type": "resource",
+      "staticData": []
+    },
+    {
+      "readonly": false,
+      "name": "popAID",
+      "onLoad": "if ( typeof(window.params.actionItemId) != 'undefined') {\n    var aid = window.params.actionItemId;\n} else {\n   //temporary - for testing only.\n   window.params.actionItemId = 6;\n}\nsetTimeout( function(){ \n    $ActionItemId.$load();\n}, \n500);",
+      "model": "ActionItemContent",
+      "style": "hidden",
+      "loadInitially": true,
+      "type": "text",
+      "parameters": {},
+      "required": false,
+      "validation": {}
+    },
+    {
+      "readonly": false,
+      "name": "ReviewStatus",
+      "model": "ActionItemReviewStatus",
+      "style": "hidden",
+      "loadInitially": true,
+      "type": "text",
+      "parameters": {
+        "actionitemid": "$$params.actionItemId"
+      },
+      "value": "gcraact_rvst_code",
+      "required": false,
+      "validation": {}
+    },
+    {
+      "readonly": false,
+      "name": "ActionItemId",
+      "onLoad": "$ActionItemContentDetail.$load();",
+      "model": "ActionItemContent",
+      "style": "hidden",
+      "loadInitially": false,
+      "type": "text",
+      "parameters": {
+        "actionItemId": "$$params.actionItemId",
+        "pageid": "$$params.id"
+      },
+      "value": "ACTION_ITEM_ID",
+      "required": false,
+      "validation": {}
+    },
+    {
+      "resource": "virtualDomains.AIPImmunizationRecord",
+      "name": "ImmunizationRecord",
+      "type": "resource",
+      "staticData": []
+    },
+    {
+      "name": "ImmunizationStatusStatic",
+      "type": "resource",
+      "staticData": [
+        {
+          "statusDesc": "I am fully vaccinated, but have not yet uploaded proof of vaccination in Aggie Health. [A person is fully vaccinated two weeks after they received their final dose of a required and/or accepted vaccine (two doses for Pfizer or Moderna, one for Johnson & Johnson).",
+          "statusCode": "VC"
+        },
+        {
+          "statusDesc": "I am not fully vaccinated, but I plan to be and will upload my proof of vaccination before Spring Semester starts on Monday, January 10,2022. I understand that a university official will follow up with me regarding my vaccination status.  **Information for vaccination clinics can be found here: <a href=\"https://vaccine.usu.edu\">vaccine.usu.edu</a>.",
+          "statusCode": "PL"
+        },
+        {
+          "statusDesc": "During Spring Semester 2022, I will be attending courses fully online and reside outside the state of Utah.",
+          "statusCode": "NA"
+        },
+        {
+          "statusDesc": "I am not fully vaccinated. I am claiming an exemption from USU's vaccination requirement based on a <strong>medical reason</strong> provided under Utah Law.",
+          "statusCode": "XM"
+        },
+        {
+          "statusDesc": "I am not fully vaccinated. I am claiming an exemption from USU's vaccination requirement based on a <strong>religious belief</strong> provided under Utah Law.",
+          "statusCode": "XR"
+        },
+        {
+          "statusDesc": "I am not fully vaccinated. I am claiming an exemption from USU's vaccination requirement based on a <strong>personal belief</strong> provided under Utah Law.",
+          "statusCode": "XP"
+        }
+      ]
+    },
+    {
+      "resource": "virtualDomains.AIPImmunizationStatus",
+      "name": "ImmunizationStatus",
+      "type": "resource",
+      "staticData": []
+    },
+    {
+      "components": [
+        {
+          "documentation": "",
+          "loadInitially": true,
+          "label": "Immunization Status",
+          "type": "radio",
+          "required": false,
+          "sourceParameters": {},
+          "name": "ImmunizationSelection",
+          "labelStyle": "preformatted",
+          "sourceModel": "ImmunizationStatus",
+          "model": "imst_code",
+          "style": "check-list",
+          "labelKey": "none}}<span ng-bind-html=\"item.imst_long_desc\"></span>{{item.none",
+          "valueKey": "imst_code",
+          "value": ""
+        },
+        {
+          "valueStyle": "form-control comment-box",
+          "readonly": false,
+          "name": "ImmunizationComment",
+          "style": "form-group",
+          "model": "comment",
+          "loadInitially": true,
+          "label": "Additional Comments",
+          "type": "textArea",
+          "parameters": {},
+          "validation": {},
+          "required": false,
+          "documentation": ""
+        }
+      ],
+      "nextButtonLabel": "Next",
+      "name": "ImmunizationSurveryForm",
+      "showInitially": true,
+      "type": "form"
+    },
+    {
+      "components": [
+        {
+          "allowDelete": false,
+          "components": [],
+          "allowNew": false,
+          "pageSize": 5,
+          "saveDataLabel": "hide this save",
+          "loadInitially": true,
+          "type": "detail",
+          "newRecordLabel": "hide this add",
+          "deleteRecordLabel": "hide this delete",
+          "refreshDataLabel": "hide this refresh",
+          "name": "ImmunizationRecordDetail",
+          "allowModify": false,
+          "onLoad": "var contextSelector = '[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"]';\nvar context = $(contextSelector);\n\nwindow.__context = context;\nwindow.__ImmunizationRecord = $ImmunizationRecord;\n\n$hasImmunizationRecord = false;\n\nwindow.doUpdateImmunzationSurvey = (event) => {\n  var selectedRadio = $('.check-list input[type=\"radio\"]:checked', context);\n  var commentBox = $('textarea', context);\n\n  var data = {\n    immunization_comment: commentBox.val(),\n    imst_code: selectedRadio.val(),\n  };\n  var queryParams = null;\n  console.log(data)\n\n  $ImmunizationRecord.post(\n    data,\n    queryParams,\n    function () {\n      alert(\"Immunization Survey submitted successfully.\", {\n        type: \"success\",\n        flash: true,\n      });\n    },\n    function (response) {\nconsole.log(arguments, data, selectedRadio, commentBox)\n      alert(response.data.errors.errorMessage, {\n        type: \"error\",\n        flash: true,\n      });\n    }\n  );\n};\n\n$(\"#pbid-ActionItemContentDetail-save-button\", context).attr(\n  \"onclick\",\n  \"return doUpdateImmunzationSurvey(event);\"\n);\n\n$('.check-list', context).on(\n  \"change\",\n  'input[type=\"radio\"]',\n  function (event) {\n      var isChecked = $(\".check-list input[type='radio']:checked\", context).length === 1;\n\n      if(isChecked) {\n        if(!$hasImmunizationRecord) {\n            params.isResponseModified = true;\n        }\n        $(\"#pbid-ActionItemContentDetail-save-button\", context).removeAttr(\n          \"disabled\"\n        );\n      } else {\n        params.isResponseModified = false;\n        $(\"#pbid-ActionItemContentDetail-save-button\", context).attr(\"disabled\", \"disabled\");\n      }\n  }\n);\nsetTimeout( () => {\n    //$ActionItemStatusAgree.load();\n    if($ActionItemContentDetail && $ActionItemContentDetail.STATUS_COUNT > 0) {\n        $hasImmunizationRecord = true;\n    }\n},\n300);",
+          "model": "ImmunizationRecord",
+          "allowReload": false,
+          "parameters": {}
+        },
+        {
+          "allowDelete": false,
+          "components": [
+            {
+              "asHtml": true,
+              "name": "ActionItemContentDisplay",
+              "onLoad": "/*$(\"#pbid-ActionItemContentDetail-save-button\").removeClass('btn-sm').addClass('btn-primary').addClass('btn-md');*/\n\n$ActionItemStatusAgree.$load();",
+              "model": "ACTION_ITEM_CONTENT",
+              "loadInitially": true,
+              "type": "display",
+              "value": ""
+            }
+          ],
+          "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}\n$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop('disabled', false);\nwindow.params.isResponseLocked = false;",
+          "onSave": "",
+          "allowNew": false,
+          "documentation": "Displays data from virtual domain ActionItemContent",
+          "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\nwindow.params.saved=true;\n$ActionItemContentDetail.$load();",
+          "pageSize": 1,
+          "label": "",
+          "loadInitially": false,
+          "type": "detail",
+          "newRecordLabel": "",
+          "name": "ActionItemContentDetail",
+          "allowModify": true,
+          "onLoad": "",
+          "model": "ActionItemContent",
+          "allowReload": false,
+          "parameters": {
+            "actionitemid": "$$params.actionItemId",
+            "pageid": "$$params.id"
           }
-    ],
-    "name": "AIPImmunizationSurvey",
-    "label": "",
-    "type": "page",
-    "importCSS": ""
+        }
+      ],
+      "name": "PolicyBlock",
+      "showInitially": true,
+      "label": "",
+      "type": "block"
+    },
+    {
+      "name": "CSS",
+      "type": "literal",
+      "value": "<style>\n/*\n  could also so an @import, but it is probably easier to deploy to just have it in here\n\n  ** the @import method requires stylesheet to be added in through CSS Manager **\n  ** URL would look something like this **\n  @import url('/BannerExtensibility/cssRender?name=aip.ImmunizationSurvey');\n  */\n\n\n/*\n    Make sure all rules are prefixed in a way that it doesn't bleed into other action\n    items as the css will be rendered on page with other items!\n*/\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] .check-list {\n    margin-bottom: 1em;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] .check-list .pb-radiolabel {\n    display: flex;\n    justify-content: space-between;\n    column-gap: 8px;\n    margin-bottom: 2.5em;\n    line-height: 1.4;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] .check-list .pb-radiolabel > span {\n    flex: 1;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] label.preformatted {\n    font-weight: normal;\n    white-space: pre-line;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] textarea.comment-box {\n    width: 100%;\n    max-width: 600px;\n    height: 12em;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] button.primary[disabled] {\n    background-color: #ddd !important;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] a {\n    text-decoration: underline;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] .pb-radio {\n    margin-top: 1em;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] .pb-form-item-container.pb-textArea {\n    padding-left: 15px;\n    padding-right: 15px;\n}\n\n[ng-controller^=\"CustomPageController_AIPImmunizationSurvey\"] fieldset {\n    border: 0 none;\n}\n\n</style>"
+    }
+  ],
+  "name": "AIPImmunizationSurvey",
+  "label": "",
+  "type": "page",
+  "importCSS": ""
 }

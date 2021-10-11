@@ -1,11 +1,11 @@
 <style>
 /*
-  could also so an @import, but it is probably easier to deploy to just have it in here
+    could also so an @import, but it is probably easier to deploy to just have it in here
 
-  ** the @import method requires stylesheet to be added in through CSS Manager **
-  ** URL would look something like this **
-  @import url('/BannerExtensibility/cssRender?name=aip.ImmunizationSurvey');
-  */
+    ** the @import method requires stylesheet to be added in through CSS Manager **
+    ** URL would look something like this **
+    @import url('/BannerExtensibility/cssRender?name=aip.ImmunizationSurvey');
+    */
 
 
 /*
@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     column-gap: 8px;
-    margin-bottom: 1em;
+    margin-bottom: 2.5em;
     line-height: 1.4;
 }
 
@@ -30,6 +30,7 @@
 
 [ng-controller^="CustomPageController_AIPImmunizationSurvey"] label.preformatted {
     font-weight: normal;
+    white-space: pre-line;
 }
 
 [ng-controller^="CustomPageController_AIPImmunizationSurvey"] textarea.comment-box {
@@ -41,4 +42,22 @@
 [ng-controller^="CustomPageController_AIPImmunizationSurvey"] button.primary[disabled] {
     background-color: #ddd !important;
 }
+
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] a {
+    text-decoration: underline;
+}
+
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] .pb-radio {
+    margin-top: 1em;
+}
+
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] .pb-form-item-container.pb-textArea {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+[ng-controller^="CustomPageController_AIPImmunizationSurvey"] fieldset {
+    border: 0 none;
+}
+
 </style>
