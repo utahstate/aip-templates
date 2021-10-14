@@ -1,0 +1,27 @@
+{
+   "owner": "A00350677",
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      },
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT gtvimmu_code           \"immu_code\",\r\n       gtvimmu_desc           \"immu_desc\",\r\n       gtvimmu_surrogate_id   \"id\"\r\n  FROM gtvimmu\r\n WHERE gtvimmu_code = NVL ( :immu_code, gtvimmu_code)",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPImmunizationCode",
+   "codePost": null,
+   "developerSecurity": []
+}

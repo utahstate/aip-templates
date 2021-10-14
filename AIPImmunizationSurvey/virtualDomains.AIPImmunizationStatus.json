@@ -1,0 +1,27 @@
+{
+   "owner": "A00350677",
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      },
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT gtvimst_code           \"imst_code\",\r\n       gtvimst_desc           \"imst_desc\",\r\n       zsrimst_long_desc      \"imst_long_desc\",\r\n       gtvimst_surrogate_id   \"id\"\r\n  FROM gtvimst LEFT JOIN baninst1.zsrimst ON gtvimst_code = zsrimst_imst_code\r\n WHERE gtvimst_code = NVL ( :imst_code, gtvimst_code)",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AIPImmunizationStatus",
+   "codePost": null,
+   "developerSecurity": []
+}
