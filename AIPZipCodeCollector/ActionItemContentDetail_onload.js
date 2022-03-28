@@ -1,4 +1,4 @@
-var contextSelector = '[page="AIPZipCodeCollector202230"]';
+var contextSelector = '[page="AIPZipCodeCollector202240"]';
 var context = $(contextSelector);
 
 var styleRules = [
@@ -33,7 +33,7 @@ window.doUpdateZipCodeCollector = function(event) {
   //   return false;
   // }
 
-  $ModelStudentLocation.$post({ TERM_CODE: '202230', ZIP_CODE: $TextZipCode }, null, function() {
+  $ModelStudentLocation.$post({ TERM_CODE: '202240', ZIP_CODE: $TextZipCode }, null, function() {
     alert("Zip Code submitted successfully.", {type:"success", flash:true});
     removeZipCodeField();
   }, function() {
