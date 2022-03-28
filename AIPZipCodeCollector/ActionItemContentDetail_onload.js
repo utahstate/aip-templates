@@ -1,13 +1,20 @@
-var contextSelector = '[page="AIPZipCodeCollector"]';
+var contextSelector = '[page="AIPZipCodeCollector202230"]';
 var context = $(contextSelector);
 
 var styleRules = [
-  "#pbid-TextZipCode-container { font-size: 1.10em; font-weight: bold; margin-left: 4px; margin-bottom: 1px; padding: .4em .75em; color: #4f585f;  }",
+  "#pbid-TextZipCode-container { font-size: 1.10em; font-weight: bold; color: #4f585f; line-height: 1.4; padding-left: .75em;}",
   "button.primary[disabled] { background-color: #ddd !important; }",
   "fieldset { border: 0 none; padding: 1em 0; }",
   ".zip-code-collector-submitted-message { padding: 1em .7em 0; font-size: 1.25em; }",
-  "div.pb-literal { line-height: 1.4; }",
-  "legend, .pagination-container { display: none; }",
+  "div.pb-literal { margin: 2em 0; line-height: 1.4; }",
+  "span.pb-detail { margin: 2em 0; line-height: 1.4; display: block; }",
+  "legend { display: none; }",
+  ".pagination-container { display: none; }",
+  "table { border: 0 none; }",
+  "td { padding: 5px 15px; }",
+  "th { padding: 5px 15px; }",
+  "thead tr { border-bottom: solid 1px #ddd; }",
+  "tbody tr:nth-child(even) { background-color: #eaeaea; }",
 ].join(" " + contextSelector + " ");
 
 $("<" + "style>" + styleRules + "<" + "/style>").appendTo(context);
@@ -26,7 +33,7 @@ window.doUpdateZipCodeCollector = function(event) {
   //   return false;
   // }
 
-  $ModelStudentLocation.$post({ TERM_CODE: '202120', ZIP_CODE: $TextZipCode }, null, function() {
+  $ModelStudentLocation.$post({ TERM_CODE: '202230', ZIP_CODE: $TextZipCode }, null, function() {
     alert("Zip Code submitted successfully.", {type:"success", flash:true});
     removeZipCodeField();
   }, function() {
@@ -123,4 +130,4 @@ setTimeout(function () {
       }
     });
   }
-}, 10);
+}, 100);
