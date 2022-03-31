@@ -2,7 +2,7 @@
   "constantName": "AIPZipCodeCollector202240",
   "developerSecurity": [],
   "extendsPage": null,
-  "fileTimestamp": "2022-03-28T22:46:37Z",
+  "fileTimestamp": "2022-03-31T23:16:35Z",
   "modelView": {
     "components": [
       {
@@ -77,7 +77,7 @@
             "documentation": "",
             "name": "LiteralInstructions",
             "type": "literal",
-            "value": "Welcome back for another semester! It is critical that USU knows where you plan to live while taking classes during fall semester. This helps us guide you to localized services wherever and however you are attending. <strong>Please provide the zip code of where you will be living during fall semester</strong> (not the zip code of where you are currently residing during registration)."
+            "value": "Welcome to USU!<br>\n<br>\nIt is critical that USU knows where you plan to live while taking classes during fall semester. This helps us guide you to localized services wherever and however you are attending. <strong>Please provide the zip code of where you will be living during fall semester</strong> (not the zip code of where you are currently residing during registration)."
           },
           {
             "submitLabel": "Submit",
