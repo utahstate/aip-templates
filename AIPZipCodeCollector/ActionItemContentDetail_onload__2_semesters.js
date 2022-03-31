@@ -20,7 +20,7 @@ var styleRules = [
 $("<" + "style>" + styleRules + "<" + "/style>").appendTo(context);
 
 function removeZipCodeField() {
-  $('input[type="text"]', context).forEach(function() {
+  $('input[type="text"]', context).each(function() {
       $(this).closest('form').replaceWith('<div class="zip-code-collector-submitted-message">Zip Code has been submitted for this semester.</div>');
       $('input[type="checkbox"]', context).attr('disabled', 'disabled');
   })
