@@ -74,12 +74,10 @@
           {
              "components": [
                 {
-                   "asHtml": false,
                    "documentation": "",
                    "name": "LiteralInstructions",
-                   "loadInitially": true,
-                   "type": "display",
-                   "value": "Welcome back for another semester! It is critical that USU knows where you plan to live while taking classes each term. This helps us guide you to localized services wherever and however you are attending. <strong>Please provide the zip code of where you will be living during the following semesters even if you don't currently plan to attend</strong> (not the zip code of where you are currently residing during registration)."
+                   "type": "literal",
+                   "value": "Welcome back to USU!<br>\n<br>\nIt is critical that USU knows where you plan to live while taking classes each term. This helps us guide you to localized services wherever and however you are attending. Even if you have provided your zip code during previous semesters, we still need to verify or update your zip code each semester. <strong>Please provide the zip code of where you will be living during the following semesters even if you don't plan to attend both semesters</strong> (not the zip code of where you are currently residing during registration)."
                 },
                 {
                    "submitLabel": "Submit",
