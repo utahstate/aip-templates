@@ -1,8 +1,5 @@
 AIP for collecting Zip Codes from students as part of the registration process.
 
-* [AIP Template JSON](pages.AIPZipCodeCollector.json)
-* [Virtual Domain for updating Zip Code](virtualDomains.AIPStuStudentLocationTestJohn.json)
-
 Edit page builder page called AIPZipCodeCollector. When done, export the page and save in this folder. If any other js blocks are used, create a file and save in this folder.
 
 The js goes in ActionItemContentDetail -> onload
