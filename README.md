@@ -69,16 +69,16 @@ select * from gcvasts;
 
 ## Links
 
-### [Banner DEV](https://development.banner.usu.edu/)
+## Resources
+
+* [AIP Overview](https://resources.elluciancloud.com/bundle/banner_genss_acn_configure_9.10.0/page/c_aip_overview.html)
+* [Banner Extensibility -> Page Builder](https://resources.elluciancloud.com/bundle/banner_exten_acn_use_9.10.0/page/c_page_builder.html)
+* [AIP Data Model](https://ellucian.force.com/clients/s/article/BannerGeneralSsb-AIP-Action-Item-Processing-simple-ERD-diagrams-of-table-relationships) (pdf)
+
+### [USU Banner DEV](https://development.banner.usu.edu/)
 
 * [General Self Service](https://ss-zdevl.banner.usu.edu/BannerGeneralSsb/)
   * [Action Items](https://ss-zdevl.banner.usu.edu/BannerGeneralSsb/ssb/aip#/list)
   * [Action Items Administration](https://ss-zdevl.banner.usu.edu/BannerGeneralSsb/ssb/aipAdmin/#/landing)
 * [Extensibility Page Builder](https://ss-zdevl.banner.usu.edu/BannerExtensibility/)
 * [Communitcation Management](https://ss-zdevl.banner.usu.edu/CommunicationManagement/ssb/communication#/communication)(populations)
-
-## Resources
-
-* [AIP Overview](https://resources.elluciancloud.com/bundle/banner_genss_acn_configure_9.8.0/page/c_aip_overview.html)
-* [Banner Extensibility -> Page Builder](https://resources.elluciancloud.com/bundle/banner_exten_acn_use_9.8.0/page/c_page_builder.html)
-* [AIP Data Model](https://ellucian.force.com/clients/s/article/BannerGeneralSsb-AIP-Action-Item-Processing-simple-ERD-diagrams-of-table-relationships) (pdf)
