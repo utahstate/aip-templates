@@ -74,6 +74,7 @@ select * from gcvasts;
 * [AIP Overview](https://resources.elluciancloud.com/bundle/banner_genss_acn_configure_9.10.0/page/c_aip_overview.html)
 * [Banner Extensibility -> Page Builder](https://resources.elluciancloud.com/bundle/banner_exten_acn_use_9.10.0/page/c_page_builder.html)
 * [AIP Data Model](https://ellucian.force.com/clients/s/article/BannerGeneralSsb-AIP-Action-Item-Processing-simple-ERD-diagrams-of-table-relationships) (pdf)
+* [Ellucian Page Builder Examples](https://ellucian.force.com/clients/s/article/Where-can-we-find-Banner-Extensibility-Page-Builder-examples)
 
 ### [USU Banner DEV](https://development.banner.usu.edu/)
 
