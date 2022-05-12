@@ -1,5 +1,5 @@
 {
-   "owner": "A00350677",
+   "owner": null,
    "codePut": "DECLARE\r\n  lv_user      VARCHAR2 (30) := SUBSTR (USER, 1, 30);\r\n  lv_seq_no    NUMBER (2) := 0;\r\n  lv_comment   VARCHAR2 (4000) := SUBSTR ( :immunization_comment, 1, 4000);\r\nBEGIN\r\n  SELECT NVL (MAX (gorimmu_seq_no), 0) + 1   new_seq_no\r\n    INTO lv_seq_no\r\n    FROM gorimmu\r\n   WHERE gorimmu_pidm = :parm_user_pidm AND gorimmu_immu_code = :immu_code;\r\n\r\n  INSERT INTO gorimmu (gorimmu_pidm,\r\n                       gorimmu_code,\r\n                       gorimmu_seq_no,\r\n                       gorimmu_user_id,\r\n                       gorimmu_activity_date,\r\n                       gorimmu_immu_date,\r\n                       gorimmu_imst_code,\r\n                       gorimmu_comment,\r\n                       gorimmu_data_origin)\r\n       VALUES ( :parm_user_pidm,\r\n               NVL ( :immu_code, 'COVID-19'),\r\n               lv_seq_no,\r\n               lv_user,\r\n               NVL ( :activity_date, SYSDATE),\r\n               NVL ( :immunization_date, NULL),\r\n               :imst_code,\r\n               lv_comment,\r\n               lv_user);\r\nEND;",
    "codeDelete": null,
    "virtualDomainRoles": [
@@ -7,20 +7,20 @@
          "allowDelete": false,
          "allowPost": true,
          "allowPut": true,
-         "roleName": "ADMIN-GPBADMN",
+         "roleName": "ALLROLES",
          "allowGet": true
       },
       {
          "allowDelete": false,
          "allowPost": true,
          "allowPut": true,
-         "roleName": "ALLROLES",
+         "roleName": "ADMIN-GPBADMN",
          "allowGet": true
       }
    ],
    "codeGet": "SELECT gorimmu_pidm            \"pidm\",\r\n       gorimmu_immu_code       \"immu_code\",\r\n       gtvimmu_desc            \"immu_desc\",\r\n       gorimmu_imst_code       \"imst_code\",\r\n       gtvimst_desc            \"imst_desc\",\r\n       gorimmu_user_id         \"user_id\",\r\n       gorimmu_activity_date   \"activity_date\",\r\n       gorimmu_immu_date       \"immunization_date\",\r\n       gorimmu_comment         \"immunization_comment\",\r\n       gorimmu_surrogate_id    \"id\"\r\n  FROM gorimmu\r\n       JOIN gtvimmu ON gtvimmu_code = gorimmu_immu_code\r\n       JOIN gtvimst ON gtvimst_code = gorimmu_imst_code\r\n WHERE     gorimmu_pidm = NVL ( :parm_user_pidm, gorimmu_pidm)\r\n       AND gorimmu_immu_code = NVL ( :immu_code, gorimmu_immu_code)",
    "typeOfCode": "S",
-   "fileTimestamp": null,
+   "fileTimestamp": "2021-10-19T16:21:08Z",
    "serviceName": "AIPImmunizationRecord",
    "codePost": "DECLARE\r\n  lv_user      VARCHAR2 (30) := SUBSTR (USER, 1, 30);\r\n  lv_seq_no    NUMBER (2) := 0;\r\n  lv_comment   VARCHAR2 (4000) := SUBSTR ( :immunization_comment, 1, 4000);\r\nBEGIN\r\n  SELECT NVL (MAX (gorimmu_seq_no), 0) + 1   new_seq_no\r\n    INTO lv_seq_no\r\n    FROM gorimmu\r\n   WHERE gorimmu_pidm = :parm_user_pidm AND gorimmu_immu_code = :immu_code;\r\n\r\n  INSERT INTO gorimmu (gorimmu_pidm,\r\n                       gorimmu_immu_code,\r\n                       gorimmu_seq_no,\r\n                       gorimmu_user_id,\r\n                       gorimmu_activity_date,\r\n                       gorimmu_immu_date,\r\n                       gorimmu_imst_code,\r\n                       gorimmu_comment,\r\n                       gorimmu_data_origin)\r\n       VALUES ( :parm_user_pidm,\r\n               NVL ( :immu_code, 'COVID-19'),\r\n               lv_seq_no,\r\n               lv_user,\r\n               NVL ( :activity_date, SYSDATE),\r\n               NVL ( :immunization_date, NULL),\r\n               :imst_code,\r\n               lv_comment,\r\n               lv_user);\r\nEND;",
    "developerSecurity": []

@@ -1,4 +1,9 @@
 {
+   "constantName": "AIPImmunizationSurvey",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2022-05-12T21:52:22Z",
+   "modelView": {
   "components": [
     {
       "resource": "virtualDomains.ActionItemContent",
@@ -107,7 +112,7 @@
         {
           "documentation": "",
           "loadInitially": true,
-          "label": "Immunization Status",
+                  "label": "COVID-19 Vaccination Status",
           "type": "radio",
           "required": false,
           "sourceParameters": {},
@@ -138,6 +143,7 @@
       "nextButtonLabel": "Next",
       "name": "ImmunizationSurveryForm",
       "showInitially": true,
+            "label": "",
       "type": "form"
     },
     {
@@ -207,5 +213,22 @@
   "name": "AIPImmunizationSurvey",
   "label": "",
   "type": "page",
+      "title": "",
   "importCSS": ""
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      },
+      {
+         "roleName": "STUDENT",
+         "allow": false
+      }
+   ]
 }
