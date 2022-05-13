@@ -69,12 +69,13 @@ select * from gcvasts;
 
 ## Links
 
-## Resources
+## Ellucian Resources
 
 * [AIP Overview](https://resources.elluciancloud.com/bundle/banner_genss_acn_configure_9.10.0/page/c_aip_overview.html)
 * [Banner Extensibility -> Page Builder](https://resources.elluciancloud.com/bundle/banner_exten_acn_use_9.10.0/page/c_page_builder.html)
 * [AIP Data Model](https://ellucian.force.com/clients/s/article/BannerGeneralSsb-AIP-Action-Item-Processing-simple-ERD-diagrams-of-table-relationships) (pdf)
 * [Ellucian Page Builder Examples](https://ellucian.force.com/clients/s/article/Where-can-we-find-Banner-Extensibility-Page-Builder-examples)
+* [Ellucian Extensibility docs](https://resources.elluciancloud.com/bundle/banner_extensibility_rel_release_notes/page/c_banner_exten_910.html) Click on the triple dot menu and select attachments. zip files with pdf documents including user guide.
 
 ### [USU Banner DEV](https://development.banner.usu.edu/)
 
