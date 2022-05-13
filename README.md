@@ -14,7 +14,11 @@ Once tested, create/update a folder for the action item in this repo.
 
 ## SQL Notes
 
-### Resetting status
+### Automatic Assignment of Action Items
+
+Once you've identified the specific event that determines the need to apply an action item to a user, can use the Ellucian delivered function ```GCKPACT.f_post_action_item``` to do so.
+
+### Resetting Status
 
 > Requires `select`, `update` permissions on `gcraact`.
 >
