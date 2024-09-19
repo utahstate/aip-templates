@@ -1,0 +1,194 @@
+{
+   "constantName": "AIPLicensurePrograms",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2024-09-19T17:40:42Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.ActionItemContent",
+            "name": "ActionItemContent",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemStatus",
+            "name": "ActionItemStatus",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemReviewStatus",
+            "name": "ActionItemReviewStatus",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AIPZipCodeCollector",
+            "name": "ModelStudentLocation",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "readonly": false,
+            "name": "popAID",
+            "onLoad": "if ( typeof(window.params.actionItemId) != 'undefined') {\n    var aid = window.params.actionItemId;\n} else {\n   //temporary - for testing only.\n   window.params.actionItemId = 6;\n}\nsetTimeout( function(){ \n    $ActionItemId.$load();\n}, \n500);",
+            "model": "ActionItemContent",
+            "style": "hidden",
+            "loadInitially": true,
+            "type": "text",
+            "parameters": {},
+            "required": false,
+            "validation": {}
+         },
+         {
+            "readonly": false,
+            "name": "ReviewStatus",
+            "model": "ActionItemReviewStatus",
+            "style": "hidden",
+            "loadInitially": true,
+            "type": "text",
+            "parameters": {
+               "actionitemid": "$$params.actionItemId"
+            },
+            "value": "gcraact_rvst_code",
+            "required": false,
+            "validation": {}
+         },
+         {
+            "readonly": false,
+            "name": "ActionItemId",
+            "onLoad": "$ActionItemContentDetail.$load();",
+            "model": "ActionItemContent",
+            "style": "hidden",
+            "loadInitially": false,
+            "type": "text",
+            "parameters": {
+               "actionItemId": "$$params.actionItemId",
+               "pageid": "$$params.id"
+            },
+            "value": "ACTION_ITEM_ID",
+            "required": false,
+            "validation": {}
+         },
+         {
+            "components": [
+               {
+                  "documentation": "",
+                  "name": "LiteralInstructions",
+                  "type": "literal",
+                  "value": "USU is committed to providing you with personalized services wherever and however you are accessing your courses. Therefore, it is critical that USU knows where you plan to live while taking classes each semester. <Strong> Please provide the zip code of where you will be living during Fall semester</strong> (not the zip code of where you are currently residing during registration)."
+               },
+               {
+                  "submitLabel": "Submit",
+                  "components": [
+                     {
+                        "readonly": false,
+                        "name": "TextZipCode",
+                        "labelStyle": "margin-left:1em",
+                        "onLoad": "",
+                        "label": "Zip Code",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "onUpdate": "",
+                        "validation": {},
+                        "required": true
+                     }
+                  ],
+                  "nextButtonLabel": "Next",
+                  "name": "FormZipCollector",
+                  "showInitially": true,
+                  "label": "",
+                  "type": "form"
+               },
+               {
+                  "valueStyle": "",
+                  "name": "LiteralZipCodeTable",
+                  "type": "literal",
+                  "value": "<p>\nFor your reference, the list below represents the zip codes of all our campuses and locations.\n</p>\n<table>\n  <thead>\n    <tr>\n      <th scope=\"row\">Zip Code</th>\n      <th scope=\"row\">Campus</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <tr>\n        <td>84511</td>\n        <td>Blanding</td>\n      </tr>\n      <tr>\n        <td>84302</td>\n        <td>Brigham</td>\n      </tr>\n      <tr>\n        <td>84501</td>\n        <td>Eastern</td>\n      </tr>\n      <tr>\n        <td>84037</td>\n        <td>Kaysville</td>\n      </tr>\n      <tr>\n        <td>84321</td>\n        <td>Logan</td>\n      </tr>\n      <tr>\n        <td>84532</td>\n        <td>Moab</td>\n      </tr>\n      <tr>\n        <td>84097</td>\n        <td>Orem</td>\n      </tr>\n      <tr>\n        <td>84101</td>\n        <td>Salt Lake</td>\n      </tr>\n      <tr>\n        <td>84627</td>\n        <td>Southwest</td>\n      </tr>\n      <tr>\n        <td>84074</td>\n        <td>Tooele</td>\n      </tr>\n      <tr>\n        <td>84078</td>\n        <td>Uintah Basin</td>\n      </tr>\n      <tr>\n        <td>99999</td>\n        <td>International (living outside of US)</td>\n      </tr>\n    </tr>\n  </tbody>\n</table>"
+               }
+            ],
+            "name": "BlockZipCode",
+            "showInitially": true,
+            "label": "Where will you be attending?",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "asHtml": true,
+                        "name": "ActionItemContentDisplay",
+                        "onLoad": "",
+                        "model": "ACTION_ITEM_CONTENT",
+                        "loadInitially": true,
+                        "type": "display",
+                        "value": ""
+                     },
+                     {
+                        "loadInitially": true,
+                        "type": "radio",
+                        "required": false,
+                        "sourceParameters": {
+                           "actionitemid": "$$params.actionItemId"
+                        },
+                        "name": "ActionItemStatusAgree",
+                        "onLoad": "",
+                        "model": "STATUS_RULE_ID",
+                        "sourceModel": "ActionItemStatus",
+                        "style": "",
+                        "labelKey": "STATUS_RULE_LABEL_TEXT",
+                        "valueKey": "STATUS_RULE_ID",
+                        "onUpdate": "",
+                        "value": ""
+                     }
+                  ],
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;if (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});} else {   alert( errorMessage?errorMessage:response.data, {type:\"error\"});}\n$(\"input[id^='pbid-ActionItemStatusAgree-radio']\").prop('disabled', false);\nwindow.params.isResponseLocked = false;",
+                  "onSave": "",
+                  "allowNew": false,
+                  "documentation": "Displays data from virtual domain ActionItemContent",
+                  "onSaveSuccess": "/*alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});*/\nwindow.params.saved=true;\n$ActionItemContentDetail.$load();",
+                  "pageSize": 1,
+                  "label": "",
+                  "loadInitially": false,
+                  "type": "detail",
+                  "newRecordLabel": "",
+                  "name": "ActionItemContentDetail",
+                  "allowModify": true,
+                  "onLoad": "var contextSelector = '[page=\"AIPZipCodeCollector202240\"]';\nvar context = $(contextSelector);\n\nvar styleRules = [\n  \"#pbid-TextZipCode-container { font-size: 1.10em; font-weight: bold; color: #4f585f; line-height: 1.4; padding-left: .75em;}\",\n  \"button.primary[disabled] { background-color: #ddd !important; }\",\n  \"fieldset { border: 0 none; padding: 1em 0; }\",\n  \".zip-code-collector-submitted-message { padding: 1em .7em 0; font-size: 1.25em; }\",\n  \"div.pb-literal { margin: 2em 0; line-height: 1.4; }\",\n  \"span.pb-detail { margin: 2em 0; line-height: 1.4; display: block; }\",\n  \"legend { display: none; }\",\n  \".pagination-container { display: none; }\",\n  \"table { border: 0 none; }\",\n  \"td { padding: 5px 15px; }\",\n  \"th { padding: 5px 15px; }\",\n  \"thead tr { border-bottom: solid 1px #ddd; }\",\n  \"tbody tr:nth-child(even) { background-color: #eaeaea; }\",\n].join(\" \" + contextSelector + \" \");\n\n$(\"<\" + \"style>\" + styleRules + \"<\" + \"/style>\").appendTo(context);\n\nfunction removeZipCodeField() {\n  $('input[type=\"text\"]', context).closest('form').replaceWith('<div class=\"zip-code-collector-submitted-message\">Zip Code has been submitted for this semester.</div>');\n  $('input[type=\"checkbox\"]', context).attr('disabled', 'disabled');\n}\n\nwindow.doUpdateZipCodeCollector = function(event) {\n  // this isn't working... probably due to angular ng-click hook. not sure it matters though\n  // console.log(event);\n  // if(typeof $TextZipCode == 'undefined' || $TextZipCode.search(/^\\d{5}(?:[-\\s]\\d{4})?$/) < 0) {\n  //   alert(\"Invalid Zip Code\", {type:\"error\", flash:true});\n  //   event.preventDefault();\n  //   return false;\n  // }\n\n  $ModelStudentLocation.$post({ TERM_CODE: '202440', ZIP_CODE: $TextZipCode }, null, function() {\n    alert(\"Zip Code submitted successfully.\", {type:\"success\", flash:true});\n    removeZipCodeField();\n  }, function() {\n    alert($.i18n.prop(\"js.notification.error\"), {type:\"error\", flash:true});\n  });\n};\n\n$('#pbid-ActionItemContentDetail-save-button', context).attr('onclick', 'return doUpdateZipCodeCollector(event);');\n\n// handle checkbox/save button state based on valid zipcode being entered (assumes zipcode is only textbox in the component)\n$(context).on(\n  \"change\",\n  'input[type=\"checkbox\"], input[type=\"text\"]',\n  function (event) {\n    var hasZipCode =\n      typeof $TextZipCode !== \"undefined\" &&\n      $TextZipCode.search(/^\\d{5}(?:[-\\s]\\d{4})?$/) === 0;\n\n    var isChecked = $(\"input[type='checkbox']:checked\", context).length === 1;\n\n    if (isChecked && hasZipCode) {\n      params.isResponseModified = true;\n      $(\"#pbid-ActionItemContentDetail-save-button\", context).removeAttr(\n        \"disabled\"\n      );\n    } else {\n      params.isResponseModified = false;\n      $(\"#pbid-ActionItemContentDetail-save-button\", context).attr(\n        \"disabled\",\n        \"disabled\"\n      );\n\n      if (!hasZipCode) {\n        if (event.target.type == \"checkbox\") {\n          alert(\"Invalid Zip Code\", { type: \"error\", flash: true });\n        }\n\n        $('input[type=\"checkbox\"]', context).removeAttr(\"checked\");\n      }\n    }\n  }\n);\n\n// AIP code... changes radio to textbox and manages checkbox state based on AIP item status\nsetTimeout(function () {\n  var isCheckbox = $ActionItemContentDetail.STATUS_COUNT === 1 ? true : false;\n  if (isCheckbox) {\n    // console.log(\"need checkbox\");\n    var radio = $(\"#pbid-ActionItemStatusAgree-radio-0-0\", context);\n    radio[0].type = \"checkbox\";\n\n    // remove textbox\n    if($(radio).is(':checked')) {\n      removeZipCodeField()\n    }\n  }\n  var isResponseReviewRequired = false;\n  if (typeof $ReviewStatus !== \"undefined\") {\n    isResponseReviewRequired = true;\n    if (isCheckbox) {\n      $(\"input[type='checkbox']\", context).prop({\n        disabled: isResponseReviewRequired,\n      });\n    } else {\n      $(\"input[type='radio']\", context).prop({\n        disabled: isResponseReviewRequired,\n      });\n    }\n  } else {\n    $(\"#pbid-ActionItemContentDetail-save-button\", context).click(function () {\n      var selectedResponse = isCheckbox\n        ? \"pbid-ActionItemStatusAgree-radio-0-0\"\n        : $(\"input[type='radio']:checked\", context)[0].id;\n      var responseElementId = selectedResponse.split(\n        \"pbid-ActionItemStatusAgree-radio-0-\"\n      );\n      isResponseReviewRequired =\n        data[parseInt(responseElementId[1])].STATUS_REV_REQ_IND === \"Y\"\n          ? true\n          : false;\n      if (isResponseReviewRequired) {\n        if (isCheckbox) {\n          $(\"input[type='checkbox']\", context).prop({\n            disabled: isResponseReviewRequired,\n          });\n        } else {\n          $(\"input[type='radio']\", context).prop({\n            disabled: isResponseReviewRequired,\n          });\n        }\n        $(\"#pbid-ActionItemContentDetail-save-button\", context).prop({\n          disabled: isResponseReviewRequired,\n        });\n      }\n    });\n  }\n}, 100);",
+                  "model": "ActionItemContent",
+                  "allowReload": false,
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "pageid": "$$params.id"
+                  }
+               }
+            ],
+            "name": "PolicyBlock",
+            "showInitially": true,
+            "style": "",
+            "label": "",
+            "type": "block"
+         }
+      ],
+      "name": "AIPLicensurePrograms",
+      "style": "",
+      "label": "",
+      "type": "page",
+      "importCSS": ""
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": false
+      },
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}
