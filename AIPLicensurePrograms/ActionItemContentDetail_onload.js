@@ -1,4 +1,4 @@
-var contextSelector = '[page="AIPLicensureProgram"]';
+var contextSelector = '[page="AIPLicensurePrograms"]';
 var context = $(contextSelector);
 
 var styleRules = [
@@ -80,7 +80,7 @@ $(context).on(
 // AC: This is based on the AIP master template ActionItemContentDetail
 // AIP code... changes radio to textbox and manages checkbox state based on AIP item status
 setTimeout(function() {
-  var isCheckbox = $ActionItemContentDetail.STATUS_COUNT === 1 ? true : false;
+  var isCheckbox = $ActionItemContentDetail && $ActionItemContentDetail.STATUS_COUNT === 1 ? true : false;
   if (isCheckbox) {
     // console.log("need checkbox");
     var radio = $("#pbid-ActionItemStatusAgree-radio-0-0", context);
