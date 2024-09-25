@@ -37,7 +37,7 @@ window.doUpdateLicensureProgram = function(event) {
   //   return false;
   // }
 
-  $stuLicensureProgramResponse.post({ PIDM: '202240', STATE_CODE: $SelectLicensureProgramState }, null, function() {
+  $stuLicensureProgramResponse.post({ STATE_CODE: $SelectLicensureProgramState }, null, function() {
     alert("Licensure acknowledgement submitted successfully.", { type: "success", flash: true });
     removePracticingStateField();
   }, function() {
