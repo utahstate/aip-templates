@@ -47,6 +47,20 @@ window.doUpdateLicensureProgram = function(event) {
 
 $('#pbid-ActionItemContentDetail-save-button', context).attr('onclick', 'return doUpdateLicensureProgram(event);');
 
+// Handle intent to seek licensure radio selection to show/hide the rest of the form
+$("#bpid-RadioIntentToSeekLicensure").on(
+  "change",
+  'input[type="radio"]',
+  function(event) {
+    //#pbid-RadioIntentToSeekLicensure
+    console.log('Radio change');
+    var isSeekingLicensure = $("#bpid-RadioIntentToSeekLicensure").value === "yes";
+    console.log(isSeekingLicensure);
+    $("#bpid-LiteralFormHeader-container").attr("hidden", "hidden");
+    $("#bpid-FormLicensureProgram").attr("hidden", "hidden");
+  }
+);
+
 // Handle checkbox/save button state based on selection of indended state of practice dropdown
 $(context).on(
   "change",
