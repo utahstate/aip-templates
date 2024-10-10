@@ -48,16 +48,22 @@ window.doUpdateLicensureProgram = function(event) {
 $('#pbid-ActionItemContentDetail-save-button', context).attr('onclick', 'return doUpdateLicensureProgram(event);');
 
 // Handle intent to seek licensure radio selection to show/hide the rest of the form
-$("#bpid-RadioIntentToSeekLicensure").on(
+$(context).on(
   "change",
-  'input[type="radio"]',
-  function(event) {
-    //#pbid-RadioIntentToSeekLicensure
+  "input[type=radio][name=RadioIntentToSeekLicensure]",
+  function() {
     console.log('Radio change');
-    var isSeekingLicensure = $("#bpid-RadioIntentToSeekLicensure").value === "yes";
+    var isSeekingLicensure = this.value === "yes";
+    console.log(this.value);
+    console.log(this);
     console.log(isSeekingLicensure);
-    $("#bpid-LiteralFormHeader-container").attr("hidden", "hidden");
-    $("#bpid-FormLicensureProgram").attr("hidden", "hidden");
+    if (isSeekingLicensure) {
+      // $BlockLicensureProgram.$visible = true;
+      $("#pbid-BlockLicensureProgram").attr("ng-show", "true").attr("aria-hidden", "false").removeClass("ng-hide");
+    } else {
+      // $BlockLicensureProgram.$visible = false;
+      $("#pbid-BlockLicensureProgram").attr("ng-show", "false").attr("aria-hidden", "true").addClass("ng-hide");
+    }
   }
 );
 
