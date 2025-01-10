@@ -1,3 +1,5 @@
+// ActionItemContentDetail_onload_2term.js
+// This template is for collecting summer and fall zip codes.
 var contextSelector = '[page="AIPZipCodeCollector202230"]';
 var context = $(contextSelector);
 

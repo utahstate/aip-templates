@@ -10,20 +10,69 @@ Once tested, create/update a folder for the action item in this repo.
 
 * Export and save the JSON for the page
 * Export and save any virtual domains needed
-* Any changes needed to the action item should be refelcted in this repository.
+* Any changes needed to the action item should be reflected in this repository.
+
+Currently maintained AIP templates:
+* AIPZipCodeCollector
+* AIPLicensurePrograms
+* AIPImmunizationSurvey
+
+## AIPZipCodeCollector
+This process is for collecting information about where students will be studying for each semester.
+Originally written in 2021 by John Pope. These Page Builder pages/Action Items currently need to be updated every term
+because the term code is hard coded and would be a little painful to automate. Prior to Summer 2025, one action item
+was used for spring semester, and then a second was used for both summer and fall, however for Summer 2025 (202530)
+the registrars have moved summer registration times so that there need to be separate pages for each, but with different
+term codes. The summer and fall action items will be added at different times but will overlap, so we can't just have a
+single page we need a copy that differs only by term code.
+
+So the process moving forward is that we have three different pages (spring, summer, & fall) in Page Builder that differ
+only by the term code specified in `ActionItemContentDetail_onload.js`. Before each registration perioid begins we need to:
+1. Update the particular Page Builder page by editing the `ActionItemContentDetail` component and changing it's `onLoad`
+property with the contents of `ActionItemContentDetail_onload.js` with an updated term code. (Don't forget to hit the
+"Compile & Save" button)
+2. If the registrars has created a new Action Item, you will need to insert a record into `GCBPBTR`.
+(See `SQL/pageBuilderToAIP.sql`). If the Action Item is just being updated, then the existing record in GCBPBTR can be
+updated to match.
+3. The entire Page Builder page can then be exported from ZDEVL and imported in ZPPRD/ZPROD. The `GCBPBTR` record will
+also need to be created.
+
+## AIPLicensurePrograms
+Originally written in 2024. Currently the Action Item is assigned based on the student's program and asks whether or
+not they intend to licensure. If the student does, they are asked which state they intend to practice in and are provided
+a link to a site with info for the student to determine whether or not the license for their program is valid in the state
+they intend to practice in.
+
+Notes for the proposed features for a future version:
+* There is already an x-walk for mapping programs to banner degrees?
+* Create resource/make sure page builder has the program x-walk & assigned program data.
+* Need to put the data about in which states licenses are valid into banner.
+* When state is selected, inform the user and highlight whether license is valid in selected state.
+
+I think that Page Builder/Action items is not going to be a feasable/worthwhile way of implementing something more
+complicated like the Registrars wants. In addition to all the maintainance issues I believe there are some accessibility
+problems with our current system.
 
 ## SQL Notes
 
 ### Automatic Assignment of Action Items
 
 Once you've identified the specific event that determines the need to apply an action item to a user, can use the Ellucian delivered function ```GCKPACT.f_post_action_item``` to do so.
+You can also manually assign the action item with the following query:
+```sql
+insert into GCRAACT(GCRAACT_GCBACTM_ID, GCRAACT_GCVASTS_ID, GCRAACT_PIDM, GCRAACT_GCBAGRP_ID,
+                    GCRAACT_DISPLAY_START_DATE, GCRAACT_DISPLAY_END_DATE, GCRAACT_ACTIVITY_DATE, GCRAACT_USER_ID,
+                    GCRAACT_USER_RESPONSE_DATE, GCRAACT_CREATOR_ID, GCRAACT_CREATE_DATE, GCRAACT_DATA_ORIGIN)
+values (:action_item_id, 1, :pidm, 2, to_date('01-SEP-24 00:00:00', 'DD-MON-RR HH24:MI:SS'),
+        to_date('01-DEC-24 00:00:00', 'DD-MON-RR HH24:MI:SS'), sysdate, 'COMMMGR', null, 'SYSTEM', sysdate, 'Banner');
+```
 
 ### Resetting Status
 
 > Requires `select`, `update` permissions on `gcraact`.
 >
 > ```sql
-> GRANT SELECT, UPDATE on GCRAACT to Z_YOUR_USER;
+> GRANT SELECT, INSERT, UPDATE, DELETE on GCRAACT to Z_YOUR_USER;
 > ```
 > May also need/want `insert`, though the population should create a record for any users you plan to test with
 
@@ -43,7 +92,10 @@ commit;
 
 ### SQL notes
 
-Notes on other related tables to help figure out what ids to use for managing AIP statuses:
+To associate a Page Builder page with an Action Item, you will need to insert a record into `GCBPBTR` connecting the two by name.
+See (SQL/pageBuilderToAIP.sql)[SQL/pageBuilderToAIP.sql] for an example of what that insert should look like.
+ 
+Other useful queries for managing status of Action Items etc:
 
 ```sql
 select * from spriden where spriden_id = :anumber;
@@ -88,3 +140,9 @@ select * from gcvasts;
   * [Action Items Administration](https://ss-zdevl.banner.usu.edu/BannerGeneralSsb/ssb/aipAdmin/#/landing)
 * [Extensibility Page Builder](https://ss-zdevl.banner.usu.edu/BannerExtensibility/)
 * [Communitcation Management](https://ss-zdevl.banner.usu.edu/CommunicationManagement/ssb/communication#/communication)(populations)
+
+
+## Maintainers
+* Registrars, process owner: Adam Gleed
+* EAA, Banner admin AI assignment process: Trevor Bennett
+* EI, Page Builder page maintainer: Autumn Canfield

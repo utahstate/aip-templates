@@ -1,4 +1,6 @@
-var contextSelector = '[page="AIPZipCodeCollector202240"]';
+//ActionItemContentDetail_onload_1term.js
+// This template is for collecting spring zip codes.
+var contextSelector = '[page="AIPZipCodeCollector"]';
 var context = $(contextSelector);
 
 var styleRules = [
@@ -33,7 +35,7 @@ window.doUpdateZipCodeCollector = function(event) {
   //   return false;
   // }
 
-  $ModelStudentLocation.$post({ TERM_CODE: '202240', ZIP_CODE: $TextZipCode }, null, function() {
+  $ModelStudentLocation.$post({ TERM_CODE: '202520', ZIP_CODE: $TextZipCode }, null, function() {
     alert("Zip Code submitted successfully.", {type:"success", flash:true});
     removeZipCodeField();
   }, function() {
