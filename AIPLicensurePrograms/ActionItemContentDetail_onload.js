@@ -20,8 +20,13 @@ var styleRules = [
 $("<" + "style>" + styleRules + "<" + "/style>").appendTo(context);
 
 function removePracticingStateField() {
-  $('input[type="text"]', context).closest('form').replaceWith('<div class="licensure-acknowledgement-submitted-message">Zip Code has been submitted for this semester.</div>');
+  $('input[type="text"]', context).closest('form').replaceWith('<div class="licensure-acknowledgement-submitted-message">Licensure program requirements acknowledged.</div>');
   $('input[type="checkbox"]', context).attr('disabled', 'disabled');
+  $('input[type="radio"]', context).attr('disabled', 'disabled');
+  $('input[type="select"]', context).attr('disabled', 'disabled');
+  $('#pbid-BlockLicensureResponseRecorded', context).attr("ng-show", "true").attr("aria-hidden", "false").removeClass("ng-hide");
+  $("#pbid-BlockLicensureProgram").attr("ng-show", "false").attr("aria-hidden", "true").addClass("ng-hide");
+  $("#pbid-BlockIntentToSeekLicensure").attr("ng-show", "false").attr("aria-hidden", "true").addClass("ng-hide");
 }
 
 window.doUpdateLicensureProgram = function(event) {
@@ -37,12 +42,20 @@ window.doUpdateLicensureProgram = function(event) {
   //   return false;
   // }
 
-  $stuLicensureProgramResponse.post({ STATE_CODE: $SelectLicensureProgramState }, null, function() {
-    alert("Licensure acknowledgement submitted successfully.", { type: "success", flash: true });
-    removePracticingStateField();
-  }, function() {
-    alert($.i18n.prop("js.notification.error"), { type: "error", flash: true });
-  });
+  $stuLicensureProgramResponse.post(
+    {
+      STATE_CODE: $SelectLicensureProgramState,
+      SEEKING_LICENSURE: $RadioIntentToSeekLicensure === 'Y' ? 'Y' : 'N',
+    },
+    null,
+    function() {
+      alert("Licensure acknowledgement submitted successfully.", { type: "success", flash: true });
+      removePracticingStateField();
+    },
+    function() {
+      alert($.i18n.prop("js.notification.error"), { type: "error", flash: true });
+    }
+  );
 };
 
 $('#pbid-ActionItemContentDetail-save-button', context).attr('onclick', 'return doUpdateLicensureProgram(event);');
@@ -52,11 +65,7 @@ $(context).on(
   "change",
   "input[type=radio][name=RadioIntentToSeekLicensure]",
   function() {
-    console.log('Radio change');
-    var isSeekingLicensure = this.value === "yes";
-    console.log(this.value);
-    console.log(this);
-    console.log(isSeekingLicensure);
+    var isSeekingLicensure = this.value === "Y";
     if (isSeekingLicensure) {
       // $BlockLicensureProgram.$visible = true;
       $("#pbid-BlockLicensureProgram").attr("ng-show", "true").attr("aria-hidden", "false").removeClass("ng-hide");
@@ -153,4 +162,3 @@ setTimeout(function() {
     });
   }
 }, 100); // AC: This is changed from 300 in the template, not sure why.
-
